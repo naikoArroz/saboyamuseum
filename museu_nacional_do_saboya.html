@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17130f">
+<title>Museu Nacional do Saboya</title>
+<style>
+  :root{
+    --bg:#17130f; --panel:#211b15; --paper:#eee4cf; --muted:#b9aa8e;
+    --gold:#e5bd70; --red:#a84435; --line:#514332; --green:#a4ad83;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--paper);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;z-index:5;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E")}
+  a{color:var(--gold)}
+  button{font:inherit;cursor:pointer}
+  .topbar{position:sticky;top:0;z-index:10;background:#17130feF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+  .nav{max-width:1150px;margin:auto;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+  .brand{font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:bold}
+  .navlinks{display:flex;gap:18px;flex-wrap:wrap}
+  .navlinks a{text-decoration:none;color:var(--paper);font-size:.88rem}
+  .navlinks a:hover{color:var(--gold)}
+  .hero{min-height:82vh;display:grid;place-items:center;text-align:center;padding:75px 20px 85px;position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% 35%,#473621 0%,#211a12 38%,#17130f 75%)}
+  .hero:before,.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #8d754a55;transform:rotate(45deg)}
+  .hero:before{left:-150px;top:20%}.hero:after{right:-150px;bottom:10%}
+  .seal{width:95px;height:95px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;color:var(--gold);font-size:2.2rem;box-shadow:0 0 0 7px #e5bd7014,0 0 45px #e5bd7018}
+  .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.75rem;color:var(--gold)}
+  h1{font-size:clamp(2.7rem,8vw,6.4rem);line-height:.98;letter-spacing:-.045em;margin:15px 0 18px;text-transform:uppercase}
+  h1 span{display:block;color:var(--gold);font-style:italic;font-weight:normal}
+  .hero p{max-width:670px;margin:0 auto;color:#d0c2a8;font-size:1.08rem}
+  .actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-block;border:1px solid var(--gold);padding:12px 20px;background:var(--gold);color:#21180d;text-decoration:none;text-transform:uppercase;letter-spacing:.08em;font-weight:bold;font-size:.8rem;transition:.2s}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px #0005}
+  .btn.secondary{background:transparent;color:var(--gold)}
+  .ticker{background:var(--gold);color:#1d160c;overflow:hidden;white-space:nowrap;padding:8px 0;font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;font-weight:bold}
+  .ticker span{display:inline-block;animation:scroll 28s linear infinite}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  main{max-width:1150px;margin:auto;padding:0 22px}
+  section{padding:76px 0;border-bottom:1px solid var(--line);scroll-margin-top:70px}
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+  .section-head h2{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:8px 0 0}
+  .section-head p{max-width:410px;color:var(--muted);margin:0}
+  .kicker{color:var(--gold);font-size:.75rem;text-transform:uppercase;letter-spacing:.2em}
+  .intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+  .panel{background:var(--panel);border:1px solid var(--line);padding:26px;position:relative}
+  .panel h3{font-size:1.55rem;margin:0 0 10px}
+  .panel p{color:#d0c2a8}
+  .stamp{display:inline-block;border:1px solid var(--red);color:#df8b7b;padding:5px 9px;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;transform:rotate(-3deg)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+  .stat{border-top:1px solid var(--line);padding-top:12px}
+  .stat strong{display:block;color:var(--gold);font-size:1.65rem}
+  .stat small{color:var(--muted)}
+  .portrait{min-height:290px;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#352a1b,#15110d);border:1px dashed #8c744d;padding:22px}
+  .portrait .emoji{font-size:5rem;filter:grayscale(.3)}
+  .portrait p{max-width:260px;margin:12px auto 0;color:var(--muted);font-size:.9rem}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .exhibit{background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:.25s}
+  .exhibit:hover{transform:translateY(-5px);border-color:var(--gold)}
+  .art{aspect-ratio:4/3;background:linear-gradient(135deg,#493923,#21180f);display:grid;place-items:center;position:relative;overflow:hidden}
+  .art img{width:100%;height:100%;object-fit:cover;display:block}
+  .art .placeholder{font-size:3rem;opacity:.8}
+  .art:after{content:"ACERVO OFICIAL";position:absolute;bottom:10px;left:10px;font-size:.63rem;letter-spacing:.14em;background:#17130fdd;padding:4px 7px;color:var(--gold)}
+  .exhibit-content{padding:18px}
+  .exhibit-content small{color:var(--gold);text-transform:uppercase;letter-spacing:.12em}
+  .exhibit-content h3{margin:7px 0;font-size:1.3rem}
+  .exhibit-content p{margin:0;color:var(--muted);font-size:.95rem}
+  .quote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .quote{padding:23px;background:#e8dcc3;color:#21180d;position:relative;min-height:170px;display:flex;flex-direction:column;justify-content:space-between}
+  .quote:before{content:"“";font-size:4rem;line-height:.6;color:#a84435}
+  .quote blockquote{font-size:1.25rem;font-weight:bold;margin:12px 0}
+  .quote cite{font-style:normal;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#6b5840}
+  .timeline{border-left:1px solid var(--gold);margin-left:10px;padding-left:28px;display:grid;gap:25px}
+  .event{position:relative}
+  .event:before{content:"";position:absolute;width:10px;height:10px;background:var(--gold);border-radius:50%;left:-34px;top:8px;box-shadow:0 0 0 5px #e5bd701a}
+  .event .year{color:var(--gold);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase}
+  .event h3{margin:4px 0;font-size:1.3rem}
+  .event p{margin:0;color:var(--muted)}
+  .secret-box{border:1px solid var(--gold);padding:32px;text-align:center;background:radial-gradient(ellipse at center,#352719,#1b1510)}
+  .lock{font-size:2.6rem}
+  .secret-box h2{font-size:2rem;margin:8px 0}
+  .secret-box p{color:var(--muted);max-width:560px;margin:0 auto 18px}
+  .secret-form{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+  input{background:#110e0b;border:1px solid var(--line);color:var(--paper);padding:12px 14px;min-width:210px;font:inherit}
+  .secret-result{display:none;margin:22px auto 0;max-width:650px;padding:20px;background:#0e0c09;border:1px dashed var(--red)}
+  .secret-result.show{display:block;animation:appear .4s ease}
+  @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .visitor-form{display:grid;grid-template-columns:1fr 2fr auto;gap:10px}
+  .visitor-list{display:grid;gap:8px;margin-top:18px}
+  .visitor-entry{border-left:3px solid var(--gold);background:var(--panel);padding:10px 14px;color:var(--muted)}
+  footer{text-align:center;padding:35px 20px;color:var(--muted);font-size:.85rem}
+  footer strong{color:var(--gold)}
+  .notice{font-size:.82rem;color:var(--muted)}
+  @media(max-width:760px){
+    .nav{align-items:flex-start;flex-direction:column}.navlinks{gap:12px}
+    .intro-grid{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}
+    .section-head{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:repeat(3,1fr)}
+    .visitor-form{grid-template-columns:1fr}.quote-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:480px){main{padding:0 15px}section{padding:54px 0}.grid{grid-template-columns:1fr}.hero{min-height:74vh}.panel{padding:20px}.stats strong{font-size:1.35rem}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="nav">
+    <div class="brand">✦ Museu Nacional do Saboya</div>
+    <div class="navlinks">
+      <a href="#sobre">O espécime</a><a href="#acervo">Acervo</a><a href="#frases">Frases</a><a href="#cronologia">Cronologia</a><a href="#secreto">Área restrita</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div>
+    <div class="seal">S</div>
+    <div class="eyebrow">Instituto de Estudos Saboyísticos · Est. 20XX</div>
+    <h1>Museu Nacional <span>do Saboya</span></h1>
+    <p>Uma jornada pela história, pelos mistérios e pelas decisões que fizeram especialistas do mundo inteiro perguntarem: “mas por quê?”</p>
+    <div class="actions">
+      <a class="btn" href="#acervo">Explorar o acervo</a>
+      <a class="btn secondary" href="#secreto">Acesso restrito</a>
+    </div>
+  </div>
+</section>
+<div class="ticker"><span>DOCUMENTO HISTÓRICO • PATRIMÔNIO DA ZOEIRA • NÃO ACREDITE EM TUDO • SABOYA: UM ENIGMA • DOCUMENTO HISTÓRICO • PATRIMÔNIO DA ZOEIRA • NÃO ACREDITE EM TUDO • SABOYA: UM ENIGMA • </span></div>
+
+<main>
+  <section id="sobre">
+    <div class="section-head">
+      <div><div class="kicker">Sala 01 · Introdução</div><h2>Conheça o<br>fenômeno.</h2></div>
+      <p>Uma biografia não autorizada, revisada por absolutamente ninguém e preservada para futuras gerações de curiosos.</p>
+    </div>
+    <div class="intro-grid">
+      <article class="panel">
+        <span class="stamp">Arquivo de alta importância (talvez)</span>
+        <h3>Saboya: lenda, pessoa ou evento climático?</h3>
+        <p>Os registros indicam a existência de um indivíduo conhecido como Saboya. Sua trajetória é marcada por episódios memoráveis, declarações difíceis de explicar e uma influência inexplicável sobre o grupo de amigos.</p>
+        <p><strong>Nota curatorial:</strong> substitua este texto por histórias reais e piadas internas que o próprio homenageado ache engraçadas. A ciência ainda não sabe tudo.</p>
+        <div class="stats">
+          <div class="stat"><strong>∞</strong><small>Momentos suspeitos</small></div>
+          <div class="stat"><strong>01</strong><small>Espécime catalogado</small></div>
+          <div class="stat"><strong>???</strong><small>Perguntas sem resposta</small></div>
+        </div>
+      </article>
+      <aside class="portrait">
+        <div><div class="emoji">🗿</div><h3>Retrato oficial do espécime</h3><p>Coloque aqui uma foto do Saboya. Até lá, a equipe escolheu esta representação provisória de dignidade questionável.</p></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="acervo">
+    <div class="section-head">
+      <div><div class="kicker">Sala 02 · Exposições</div><h2>O grande acervo.</h2></div>
+      <p>Peças raras, registros visuais e evidências que passaram por um rigoroso processo de seleção: “essa é muito engraçada”.</p>
+    </div>
+    <div class="grid">
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">📸</div></div>
+        <div class="exhibit-content"><small>Peça nº 001</small><h3>O retrato histórico</h3><p>Uma imagem que, segundo os curadores, vale mais que mil palavras — algumas delas censuráveis pela gramática.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">🏆</div></div>
+        <div class="exhibit-content"><small>Peça nº 002</small><h3>O feito inexplicável</h3><p>Registre aqui uma conquista, gafe ou acontecimento lendário. Data e testemunhas são bem-vindas.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">📜</div></div>
+        <div class="exhibit-content"><small>Peça nº 003</small><h3>O documento perdido</h3><p>Um print, uma frase ou um bilhete que mereça ser estudado por historiadores do caos.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">🧠</div></div>
+        <div class="exhibit-content"><small>Peça nº 004</small><h3>Teoria da conspiração</h3><p>Uma teoria obviamente fictícia sobre como Saboya sempre aparece nos momentos mais improváveis.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">🎭</div></div>
+        <div class="exhibit-content"><small>Peça nº 005</small><h3>As mil personalidades</h3><p>Uma coleção de expressões faciais, poses dramáticas ou reações que entraram para a história.</p></div>
+      </article>
+      <article class="exhibit">
+        <div class="art"><div class="placeholder">🔬</div></div>
+        <div class="exhibit-content"><small>Peça nº 006</small><h3>Estudo de caso</h3><p>O que aconteceu? Por que aconteceu? Poderia ter sido evitado? Os pesquisadores seguem confusos.</p></div>
+      </article>
+    </div>
+    <p class="notice">Para adicionar fotos: veja as instruções no fim deste arquivo. Use imagens que você tenha autorização para publicar.</p>
+  </section>
+
+  <section id="frases">
+    <div class="section-head">
+      <div><div class="kicker">Sala 03 · Patrimônio oral</div><h2>Frases lendárias.</h2></div>
+      <p>As citações abaixo são exemplos fictícios. Troque pelas frases reais do Saboya para tornar o acervo historicamente questionável e pessoalmente preciso.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote"><blockquote>“Calma, eu tenho um plano.”</blockquote><cite>— Últimas palavras antes do desastre</cite></div>
+      <div class="quote"><blockquote>“Confia em mim, o que pode dar errado?”</blockquote><cite>— Registro de 00:03 antes do caos</cite></div>
+      <div class="quote"><blockquote>“Tecnicamente, eu não estava errado.”</blockquote><cite>— Defesa apresentada ao conselho</cite></div>
+      <div class="quote"><blockquote>“Isso vai ficar entre nós, né?”</blockquote><cite>— Frase preservada por 14 testemunhas</cite></div>
+    </div>
+  </section>
+
+  <section id="cronologia">
+    <div class="section-head">
+      <div><div class="kicker">Sala 04 · Linha do tempo</div><h2>A saga do Saboya.</h2></div>
+      <p>Uma cronologia provisória. Complete os eventos com histórias verdadeiras e datas aproximadas.</p>
+    </div>
+    <div class="timeline">
+      <div class="event"><div class="year">Capítulo I · O começo</div><h3>Surge o protagonista</h3><p>O mundo seguia normalmente. Ninguém estava preparado para os próximos acontecimentos.</p></div>
+      <div class="event"><div class="year">Capítulo II · A ascensão</div><h3>O primeiro grande incidente</h3><p>Insira aqui a história que transformou um momento comum em lenda do grupo.</p></div>
+      <div class="event"><div class="year">Capítulo III · O auge</div><h3>O evento que entrou para os arquivos</h3><p>Testemunhas ainda discutem os fatos. Algumas versões são incompatíveis com a física.</p></div>
+      <div class="event"><div class="year">Capítulo IV · Atualidade</div><h3>O mistério continua</h3><p>Saboya permanece ativo. O museu segue coletando evidências, memes e relatos.</p></div>
+    </div>
+  </section>
+
+  <section id="secreto">
+    <div class="secret-box">
+      <div class="lock">🔒</div>
+      <div class="kicker">Sala 05 · Acesso restrito</div>
+      <h2>Arquivo ultrassecreto</h2>
+      <p>Somente visitantes com autorização curatorial podem acessar os documentos confidenciais. Dica: a senha inicial é <strong>SABOYA</strong>.</p>
+      <form class="secret-form" id="secretForm">
+        <input id="secretInput" type="password" placeholder="Digite a senha" aria-label="Senha da área secreta">
+        <button class="btn" type="submit">Desbloquear</button>
+      </form>
+      <div class="secret-result" id="secretResult">
+        <div class="stamp">Classificação: absolutamente duvidosa</div>
+        <h3>RELATÓRIO 007 — O CASO SABOYA</h3>
+        <p>Após meses de investigação, a comissão concluiu que Saboya é, de fato, Saboya. O orçamento da pesquisa foi gasto em lanches. A investigação continua porque ninguém sabe como encerrar o relatório.</p>
+        <p><strong>Próxima tarefa:</strong> adicionar aqui uma piada interna que só seus amigos entendam.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="visitas">
+    <div class="section-head">
+      <div><div class="kicker">Livro de visitas</div><h2>Deixe seu registro.</h2></div>
+      <p>Assine o livro de visitas e deixe uma avaliação da experiência museológica.</p>
+    </div>
+    <form class="visitor-form" id="visitorForm">
+      <input id="visitorName" maxlength="35" placeholder="Seu nome ou apelido" required>
+      <input id="visitorMessage" maxlength="180" placeholder="Sua avaliação do museu" required>
+      <button class="btn" type="submit">Registrar</button>
+    </form>
+    <p class="notice">Os registros ficam apenas nesta página enquanto ela estiver aberta; não são enviados para um servidor.</p>
+    <div class="visitor-list" id="visitorList"><div class="visitor-entry">👤 Curador anônimo: “Uma experiência que mudou absolutamente nada, mas foi engraçada.”</div></div>
+  </section>
+</main>
+
+<footer>
+  <strong>MUSEU NACIONAL DO SABOYA</strong><br>
+  Instituição fictícia de preservação da zoeira · Entrada gratuita · Seriedade em análise<br>
+  <span>Este site é uma brincadeira entre amigos. Não é uma instituição oficial.</span>
+</footer>
+
+<script>
+  // Área secreta demonstrativa — a senha fica visível no código-fonte, não é segurança real.
+  const secretForm = document.getElementById('secretForm');
+  const secretInput = document.getElementById('secretInput');
+  const secretResult = document.getElementById('secretResult');
+  secretForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (secretInput.value.trim().toUpperCase() === 'SABOYA') {
+      secretResult.classList.add('show');
+      secretInput.value = '';
+    } else {
+      alert('ACESSO NEGADO. Sua credencial foi considerada suspeita pelo conselho.');
+    }
+  });
+
+  // Livro de visitas temporário: os registros não são salvos online.
+  const visitorForm = document.getElementById('visitorForm');
+  const visitorList = document.getElementById('visitorList');
+  visitorForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('visitorName').value.trim();
+    const message = document.getElementById('visitorMessage').value.trim();
+    if (!name || !message) return;
+    const entry = document.createElement('div');
+    entry.className = 'visitor-entry';
+    const strong = document.createElement('strong');
+    strong.textContent = '👤 ' + name + ': ';
+    entry.appendChild(strong);
+    entry.appendChild(document.createTextNode('“' + message + '”'));
+    visitorList.prepend(entry);
+    visitorForm.reset();
+  });
+</script>
+</body>
+</html>
